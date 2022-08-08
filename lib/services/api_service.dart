@@ -15,19 +15,29 @@ class ApiService {
 
   //NOTE: make sure to use your OWN apikey, you can make a free acount and
   // choose a developer option it's FREE
-  final endPointUrl =
+  String endPointUrl =
       "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=3dba1c7ece4249ad8695f8bc2ee40d03";
   var url = Uri.https('newsapi.org','v2/top-headlines?',{'q': 'country=us&category=business&apiKey=3dba1c7ece4249ad8695f8bc2ee40d03'});
   //Now let's create the http request function
   // but first let's import the http package
+  //Uri ur=Uri.parse(endPointUrl);
 
   Future<List<Article>>  getArticle() async {
-    Response res = await get(endPointUrl);
+
+      var uri = Uri.https('newsapi.org', "v2/top-headlines", {
+        "country": "us",
+        "category": "business",
+
+      });
+      var response = await http.get(
+        uri,
+        headers: {"X-Api-key": "3dba1c7ece4249ad8695f8bc2ee40d03"},
+      );
    // var res = await http.get(url);
 
     //first of all let's check that we got a 200 statu code: this mean that the request was a succes
-    if (res.statusCode == 200) {
-      Map<String, dynamic> json = jsonDecode(res.body);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> json = jsonDecode(response.body);
 
       List<dynamic> body = json['articles'];
 

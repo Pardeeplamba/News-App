@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newsapp/services/api_service.dart';
 import 'package:newsapp/widgets/homecard.dart';
 
-import 'model/article_model.dart';
+import '../model/article_model.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -14,15 +14,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff464646),
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
-        title: Text("HEADLINES",style: TextStyle(fontSize: 29,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: 'RobotoMono')),),
+        title: Text("HEADLINES",style: TextStyle(fontSize: 29,color: Colors.white,fontWeight: FontWeight.bold)),),
 
 
 
       //Now let's call the APi services with futurebuilder wiget
       body: FutureBuilder(
+
         future: client.getArticle(),
         builder: (BuildContext context, AsyncSnapshot<List<Article>> snapshot) {
           //let's check if we got a response or not
@@ -46,3 +48,4 @@ class _HomePageState extends State<HomePage> {
 }
 
 
+//Color(0xff2980b9)

@@ -10,11 +10,21 @@ clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       margin:const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
       child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color.fromARGB(0, 0, 0, 0,),Color.fromARGB(255, 0, 0, 0)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
 
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Ink.image(image: NetworkImage(article.urlToImage),height: 240,fit: BoxFit.cover,
+            Ink.image(image: (article.urlToImage)==null
+          ? NetworkImage('https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg')
+            : NetworkImage(article.urlToImage),
+              height: 240,fit: BoxFit.cover,
             child: InkWell(
               onTap: (){
                 Navigator.push(
@@ -28,25 +38,29 @@ clipBehavior: Clip.antiAlias,
             ),
             ),
             Container(
+
               margin: EdgeInsets.only(left: 15),
               child: Column(
 
                 children: [
-                Text(   article.title,
+                Text(   article.title==null ?
+                  " ": article.title,
                   maxLines: 2,
 
-                  style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.normal,fontFamily: 'Robotomono'),
+                  style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.normal),
                 ),
                   SizedBox(height: 24,),
                   Row(children: [
-                    Text(article.source.name,
+                    Text(article.source.name==null ? ""
+                      :
+                      article.source.name,
                       maxLines: 1,
-                      style: TextStyle(fontSize: 12,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: 'RobotoMono'),
+                      style: TextStyle(fontSize: 12,color: Color(0xffbababa),fontWeight: FontWeight.bold),
                     ),
                     SizedBox(width: 10,),
-                    Text(article.publishedAt,
+                    Text(article.publishedAt==null ? "" : article.publishedAt,
                       maxLines: 1,
-                      style: TextStyle(fontSize: 12,color: Colors.white,fontFamily: 'RobotoMono'),
+                      style: TextStyle(fontSize: 12,color: Color(0xffbababa)),
                     ),
                   ],),
                   SizedBox(height: 12,),
